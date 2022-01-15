@@ -6,6 +6,7 @@ use Src\Enum\MusicGameType;
 use Src\Enum\MusicGameTypeShowConstAndStaticMethod;
 use Src\Enum\MusicGameTypeWithDefaultValue;
 use Src\Enum\MusicGameTypeWithMethods;
+use Src\Enum\MusicGameTypeWithTrait;
 
 class EnumTest extends TestCase
 {
@@ -117,5 +118,19 @@ class EnumTest extends TestCase
     {
         $chunithm = MusicGameTypeShowConstAndStaticMethod::getSegaMusicGame();
         $this->assertEquals(MusicGameTypeShowConstAndStaticMethod::Chunithm, $chunithm);
+    }
+
+    /**
+     * @test
+     * 可以在 Enum 內使用 trait
+     */
+    public function can_use_trait()
+    {
+        $iidxCompany = MusicGameTypeWithTrait::IIDX->showCompany();
+        $this->assertEquals('Konami', $iidxCompany);
+        $gitadoraCompany = MusicGameTypeWithTrait::Gitadora->showCompany();
+        $this->assertEquals('Konami', $gitadoraCompany);
+        $ChunithmCompany = MusicGameTypeWithTrait::Chunithm->showCompany();
+        $this->assertEquals('Sega', $ChunithmCompany);
     }
 }
