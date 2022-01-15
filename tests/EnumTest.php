@@ -35,4 +35,40 @@ class EnumTest extends TestCase
      * value 指的是值的名稱（如果有設定預設值的話）
      * 注意：如果沒有設定預設值的話 value 是無法取用的
      */
+
+    /**
+     * 目前可對 Enum 限制回傳的 type
+     * 但尚不支援 union
+     */
+
+    /**
+     * @test
+     * Enum::from
+     * 可以輸入 value > 返回對應的 Enum::key
+     * 注意：如果 value 沒有配對成功 > 則會觸發 ValueError
+     */
+    public function from()
+    {
+        $from = MusicGameTypeWithDefaultValue::from('iidx');
+        $this->assertEquals('IIDX', $from->name);
+        $this->assertEquals('iidx', $from->value);
+
+        // value 沒有配對成功
+        // $fromNotExist=MusicGameTypeWithDefaultValue::from('jubeat');
+    }
+    /**
+     * @test
+     * Enum::tryFrom
+     * 可以輸入 value > 返回對應的 Enum::key
+     * 如果 value 沒有配對成功 > 會返回 null
+     */
+    public function tryFrom()
+    {
+        // 大小寫不同也視為配對不成功
+        $tryFromWhichUpLowerNotMatch = MusicGameTypeWithDefaultValue::tryFrom('IiDx');
+        $tryFromWhichNotExist = MusicGameTypeWithDefaultValue::tryFrom('jubeat');
+
+        $this->assertEquals(null, $tryFromWhichUpLowerNotMatch);
+        $this->assertEquals(null, $tryFromWhichNotExist);
+    }
 }
