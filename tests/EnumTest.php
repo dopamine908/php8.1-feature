@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use Src\Enum\MusicGameInfo;
 use Src\Enum\MusicGameType;
+use Src\Enum\MusicGameTypeShowConstAndStaticMethod;
 use Src\Enum\MusicGameTypeWithDefaultValue;
 use Src\Enum\MusicGameTypeWithMethods;
 
@@ -96,5 +97,25 @@ class EnumTest extends TestCase
         $this->assertFalse($hasGitadoraHavingScratch);
         $hasChunithmHavingScratch = MusicGameTypeWithMethods::Chunithm->hasScratch();
         $this->assertFalse($hasChunithmHavingScratch);
+    }
+
+    /**
+     * @test
+     * 可以在 Enum 內宣告 const
+     */
+    public function const()
+    {
+        $gameType = MusicGameTypeShowConstAndStaticMethod::GAME_TYPE;
+        $this->assertEquals('musicGame', $gameType);
+    }
+
+    /**
+     * @test
+     * 可以在 Enum 內宣告 static method
+     */
+    public function static_method()
+    {
+        $chunithm = MusicGameTypeShowConstAndStaticMethod::getSegaMusicGame();
+        $this->assertEquals(MusicGameTypeShowConstAndStaticMethod::Chunithm, $chunithm);
     }
 }
