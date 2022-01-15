@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 use Src\Enum\MusicGameInfo;
 use Src\Enum\MusicGameType;
 use Src\Enum\MusicGameTypeWithDefaultValue;
+use Src\Enum\MusicGameTypeWithMethods;
 
 class EnumTest extends TestCase
 {
@@ -56,6 +57,7 @@ class EnumTest extends TestCase
         // value 沒有配對成功
         // $fromNotExist=MusicGameTypeWithDefaultValue::from('jubeat');
     }
+
     /**
      * @test
      * Enum::tryFrom
@@ -70,5 +72,29 @@ class EnumTest extends TestCase
 
         $this->assertEquals(null, $tryFromWhichUpLowerNotMatch);
         $this->assertEquals(null, $tryFromWhichNotExist);
+    }
+
+    /**
+     * @test
+     * 在 Enum 裡面可以擴充 function
+     * 不論是使用 interface 或是 自己另外新增都可以
+     * 另外值得注意的是
+     * 在 Enum 的 function 內使用 $this 會得到 Enum::case 的實體
+     */
+    public function methods()
+    {
+        $iidxCompany = MusicGameTypeWithMethods::IIDX->showCompany();
+        $this->assertEquals('Konami', $iidxCompany);
+        $gitadoraCompany = MusicGameTypeWithMethods::Gitadora->showCompany();
+        $this->assertEquals('Konami', $gitadoraCompany);
+        $ChunithmCompany = MusicGameTypeWithMethods::Chunithm->showCompany();
+        $this->assertEquals('Sega', $ChunithmCompany);
+
+        $hasIidxHavingScratch = MusicGameTypeWithMethods::IIDX->hasScratch();
+        $this->assertTrue($hasIidxHavingScratch);
+        $hasGitadoraHavingScratch = MusicGameTypeWithMethods::Gitadora->hasScratch();
+        $this->assertFalse($hasGitadoraHavingScratch);
+        $hasChunithmHavingScratch = MusicGameTypeWithMethods::Chunithm->hasScratch();
+        $this->assertFalse($hasChunithmHavingScratch);
     }
 }
