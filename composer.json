@@ -1,0 +1,23 @@
+{
+    "name": "mobius/php8.1-feature",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/",
+            "Tests\\": "tests/"
+        },
+        "classmap": [
+            "src",
+            "tests"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Mobius",
+            "email": "dopamine908@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "php": "^8.1",
+        "phpunit/phpunit": "^9.5"
+    }
+}
