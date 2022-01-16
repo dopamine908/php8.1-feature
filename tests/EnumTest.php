@@ -158,4 +158,21 @@ class EnumTest extends TestCase
 
         $this->assertTrue(true);
     }
+
+    /**
+     * @test
+     * Enum::cases() 可以列出 Enum 內所有的 case (array)
+     */
+    public function cases()
+    {
+        $cases = MusicGameTypeWithTrait::cases();
+        $this->assertEquals(
+            [
+                MusicGameTypeWithTrait::Gitadora,
+                MusicGameTypeWithTrait::IIDX,
+                MusicGameTypeWithTrait::Chunithm,
+            ],
+            $cases
+        );
+    }
 }
