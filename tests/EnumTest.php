@@ -133,4 +133,29 @@ class EnumTest extends TestCase
         $ChunithmCompany = MusicGameTypeWithTrait::Chunithm->showCompany();
         $this->assertEquals('Sega', $ChunithmCompany);
     }
+
+    /**
+     * Enum 的物件導向特性
+     * 1. 不能夠使用繼承
+     * 2. Enum::case 為 stateless singleton
+     * 3. 只允許使用部分的 magic method (__call, __callStatic, __invoke)
+     * 4. Enum::case 不能夠使用 clone (因為 singleton）
+     * 5. 可使用 Public, private, and protected methods.
+     * 6. 可使用 Public, private, and protected static methods.
+     * 7. 可使用 Public, private, and protected constants.
+     */
+
+    /**
+     * @test Enum 的物件導向特性
+     */
+    public function proof_of_singleton()
+    {
+        // Error: Cannot instantiate enum Suit
+        // $test1 = new MusicGameTypeWithTrait();
+
+        // Error: Cannot instantiate enum Suit
+        // $test2 = (new ReflectionClass(MusicGameTypeWithTrait::class))->newInstanceWithoutConstructor();
+
+        $this->assertTrue(true);
+    }
 }
