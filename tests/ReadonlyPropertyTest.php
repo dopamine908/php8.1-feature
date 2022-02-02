@@ -6,6 +6,9 @@ use Src\ReadonlyProperty\Host;
 use Src\ReadonlyProperty\House;
 use Src\ReadonlyProperty\OtherBoy;
 use Src\ReadonlyProperty\Restrictions;
+use Src\ReadonlyProperty\Son;
+use Src\ReadonlyProperty\Son1;
+use Src\ReadonlyProperty\Son2;
 
 class ReadonlyPropertyTest extends TestCase
 {
@@ -64,5 +67,30 @@ class ReadonlyPropertyTest extends TestCase
         $restrictions = new Restrictions();
         // PHP Fatal error:  Readonly property Src\ReadonlyProperty\Restrictions::$prop cannot have default value
         $this->assertTrue(true);
+    }
+
+    /**
+     * @test
+     */
+    public function inheritance()
+    {
+        /*
+         * 可到 Son, Father 打開 $prop1 or $prop2 的註解
+         * 可以知道同一個變數在繼承的過程
+         * 如果有宣告成 readonly 則不可以用其他非 readonly 的宣告去覆蓋
+         */
+        $son = new Son();
+        $this->assertTrue(true);
+
+        /**
+         * 父跟子類別都宣告 readonly 的話就不會衝突
+         * 初始化的過程不管是在父類或是子類都可以
+         * Son1 為初始化在父類的例子
+         * Son2 為初始化在子類的例子
+         */
+        $son1 = new Son1();
+        $this->assertEquals('test', $son1->prop);
+        $son2 = new Son2();
+        $this->assertEquals('test', $son2->prop);
     }
 }
