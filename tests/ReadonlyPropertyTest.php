@@ -5,6 +5,7 @@ use Src\ReadonlyProperty\Boy;
 use Src\ReadonlyProperty\Host;
 use Src\ReadonlyProperty\House;
 use Src\ReadonlyProperty\OtherBoy;
+use Src\ReadonlyProperty\Restrictions;
 
 class ReadonlyPropertyTest extends TestCase
 {
@@ -51,5 +52,17 @@ class ReadonlyPropertyTest extends TestCase
         // 但 定義過的 host name 卻可以
         $house->host->name = 'Tom';
         $this->assertEquals('Tom', $house->host->name);
+    }
+
+    /**
+     * @test
+     * Readonly Property 不能夠給予預設值(只能透過 constructor 指定）
+     */
+    public function restrictions()
+    {
+        // 可以到 Restrictions 內打開註解看執行的錯誤
+        $restrictions = new Restrictions();
+        // PHP Fatal error:  Readonly property Src\ReadonlyProperty\Restrictions::$prop cannot have default value
+        $this->assertTrue(true);
     }
 }
