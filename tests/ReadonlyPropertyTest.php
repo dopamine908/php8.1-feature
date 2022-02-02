@@ -107,4 +107,18 @@ class ReadonlyPropertyTest extends TestCase
 //        $demo = new DemoTrait();
         $this->assertTrue(true);
     }
+
+    /**
+     * @test
+     * 打開下方註解可以觀察到
+     * 在繼承關係中
+     * 即使父類別適用 union type 並且在子類別去限縮
+     * 也是不允許的
+     * 必須宣告為相同 type
+     */
+    public function inheritance_union_type()
+    {
+//        $son3=new Son3();
+        $this->assertTrue(true);
+    }
 }
