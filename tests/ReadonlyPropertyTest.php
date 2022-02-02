@@ -93,4 +93,18 @@ class ReadonlyPropertyTest extends TestCase
         $son2 = new Son2();
         $this->assertEquals('test', $son2->prop);
     }
+
+    /**
+     * @test
+     * 打開下方註解可以觀察到
+     * 在使用 trait 的時候
+     * 如果有兩個同名變數
+     * 一個宣告 readonly 一個非 readonly
+     * 則會有衝突的狀況
+     */
+    public function trait_case()
+    {
+//        $demo = new DemoTrait();
+        $this->assertTrue(true);
+    }
 }
