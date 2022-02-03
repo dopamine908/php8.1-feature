@@ -19,6 +19,11 @@ class PureIntersectionTypesTest extends TestCase
         $this->assertEquals('pass', $result);
     }
 
+
+    /**
+     * intersection type 只接受 class or interface
+     * 基礎型別無法使用 intersection type (ex: int&string)
+     */
     public function introExample(ActionA&ActionB $multipleAction): string
     {
         return 'pass';
