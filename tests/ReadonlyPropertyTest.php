@@ -9,6 +9,7 @@ use Src\ReadonlyProperty\Restrictions;
 use Src\ReadonlyProperty\Son;
 use Src\ReadonlyProperty\Son1;
 use Src\ReadonlyProperty\Son2;
+use Src\ReadonlyProperty\TestUnset1;
 
 class ReadonlyPropertyTest extends TestCase
 {
@@ -120,5 +121,20 @@ class ReadonlyPropertyTest extends TestCase
     {
 //        $son3=new Son3();
         $this->assertTrue(true);
+    }
+
+    /**
+     * @test
+     * 打開下方註解可以觀察到
+     * 在物件生成過程中 readonly property 可以被 unset
+     * 但是一但被賦值之後就不能夠在 unset 參數了
+     */
+    public function unset()
+    {
+        // $testUnset = new TestUnset();
+        // Error : Cannot unset readonly property
+
+        $testUnset1 = new TestUnset1();
+        $this->assertEquals('test', $testUnset1->prop);
     }
 }
