@@ -1,6 +1,9 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use Src\NewInInitializers\DemoA;
+use Src\NewInInitializers\DemoB;
+use Src\NewInInitializers\DemoC;
 use Src\NewInInitializers\IntroAfter;
 use Src\NewInInitializers\IntroBefore;
 use Src\NewInInitializers\NullLogger;
@@ -22,5 +25,24 @@ class NewInInitializersTest extends TestCase
         // 8.1 之後可以在 construct 直接宣告預設值
         $introAfter = new IntroAfter();
         $this->assertInstanceOf(NullLogger::class, $introAfter->logger);
+    }
+
+    /**
+     * @test
+     * 新的帶入預設值方式除了可以在初始化中使用
+     * 在一般的 function 也可以使用
+     */
+    public function allowed()
+    {
+        $actual = $this->demo1();
+        $this->assertTrue($actual);
+    }
+
+    public function demo1(
+        DemoA $demoA = new DemoA(),
+        DemoB $demoB = new DemoB(123),
+        DemoC $demoC = new DemoC(prop: 'test')
+    ) {
+        return true;
     }
 }
