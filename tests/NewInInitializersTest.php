@@ -10,6 +10,8 @@ use Src\NewInInitializers\NullLogger;
 
 class NewInInitializersTest extends TestCase
 {
+    public const A = 'A';
+
     /**
      * @test
      * 以往在初始化的時候有些預設值可能會是某些 class
@@ -34,15 +36,31 @@ class NewInInitializersTest extends TestCase
      */
     public function allowed()
     {
-        $actual = $this->demo1();
+        $actual = $this->demoAllowed();
         $this->assertTrue($actual);
     }
 
-    public function demo1(
+    public function demoAllowed(
         DemoA $demoA = new DemoA(),
         DemoB $demoB = new DemoB(123),
         DemoC $demoC = new DemoC(prop: 'test')
     ) {
         return true;
     }
+
+    /**
+     * 底下這些預設值的狀況不被允許使用
+     * 會直接讓程式的執行失敗
+     * @return void
+     */
+    // All not allowed (compile-time error):
+//    function demoNotAllow(
+//        $a = new (self::A)(), // dynamic class name
+//        $b = new class {
+//        }, // anonymous class
+//        $c = new DemoC($abc), // unsupported constant expression
+//        $d = new DemoD(...[]), // argument unpacking
+//    )
+//    {
+//    }
 }
