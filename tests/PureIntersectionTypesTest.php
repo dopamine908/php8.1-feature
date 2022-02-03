@@ -28,4 +28,14 @@ class PureIntersectionTypesTest extends TestCase
     {
         return 'pass';
     }
+
+    /**
+     * 重複或是多餘的 type
+     *
+     *
+     * function foo(): A&A {} // Disallowed
+     *
+     * use A as B;
+     * function foo(): A&B {} // Disallowed ("use" is part of name resolution)
+     */
 }
